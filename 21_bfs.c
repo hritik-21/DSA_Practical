@@ -1,76 +1,63 @@
 // Write a program to implement Breadth first search Algorithm using adjacency matrix.
 
 #include <stdio.h>
-#define max 10
+#define MAX 10
 
-int adjMatrix[max][max];
-int numVertices;
-int visited[max];
-
-int queue[max];
+int queue[MAX];
 int front = -1, rear = -1;
+int visited[MAX];
 
-void enqueue(int item) {
-    if (rear == max - 1) return;
-    if (front == -1) front = 0;
-    rear++;
-    queue[rear] = item;
+// Enqueue function
+void enqueue(int vertex) {
+    if (rear == MAX - 1)
+        return;
+    if (front == -1)
+        front = 0;
+    queue[++rear] = vertex;
 }
 
+// Dequeue function
 int dequeue() {
-    if (front == -1 || front > rear) return -1;
-    int item = queue[front];
-    front++;
-    return item;
+    if (front == -1 || front > rear)
+        return -1;
+    return queue[front++];
 }
 
-int isEmpty() {
-    return front == -1 || front > rear;
-}
+// Breadth First Search function
+void BFS(int adj[4][4], int start) {
+    int i, current;
 
-void addEdge(int src, int dest) {
-    adjMatrix[src][dest] = 1;
-    adjMatrix[dest][src] = 1;
-}
-
-void initializeGraph(int vertices) {
-    numVertices = vertices;
-    for (int i = 0; i < numVertices; i++) {
+    // Mark all vertices unvisited
+    for (i = 0; i < 4; i++)
         visited[i] = 0;
-        for (int j = 0; j < numVertices; j++) {
-            adjMatrix[i][j] = 0;
-        }
-    }
-}
 
-void BFS(int startVertex) {
-    visited[startVertex] = 1;
-    enqueue(startVertex);
+    enqueue(start);
+    visited[start] = 1;
 
-    while (!isEmpty()) {
-        int currentVertex = dequeue();
-        printf("%d ", currentVertex);
+    printf("BFS traversal starting from vertex %d: ", start);
 
-        for (int i = 0; i < numVertices; i++) {
-            if (adjMatrix[currentVertex][i] == 1 && !visited[i]) {
-                visited[i] = 1;
+    while ((current = dequeue()) != -1) {
+        printf("%d ", current);
+        for (i = 0; i < 4; i++) {
+            if (adj[current][i] == 1 && !visited[i]) {
                 enqueue(i);
+                visited[i] = 1;
             }
         }
     }
+    printf("\n");
 }
 
 int main() {
-    initializeGraph(5);
+    int adj[4][4] = {
+        {0, 1, 1, 0},
+        {1, 0, 1, 1},
+        {1, 1, 0, 0},
+        {0, 1, 0, 0}
+    };
 
-    addEdge(0, 1);
-    addEdge(0, 2);
-    addEdge(1, 3);
-    addEdge(1, 4);
-
-    printf("BFS (from vertex 0): \n");
-    BFS(0);
-    printf("\n");
+    int start = 0;  // Start BFS from vertex 0
+    BFS(adj, start);
 
     return 0;
 }
