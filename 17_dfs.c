@@ -1,48 +1,40 @@
 // Write a program to implement Depth first search Algorithm using adjacency matrix.
 
 #include <stdio.h>
-#define max 10
+#define MAX 10
 
-int adjMatrix[max][max];
-int numVertices;
-int visited[max];
+int visited[MAX];
 
-void addEdge(int src, int dest) {
-    adjMatrix[src][dest] = 1;
-    adjMatrix[dest][src] = 1; 
-}
-
-void DFS(int vertex) {
-    visited[vertex] = 1;
+// Depth First Search function
+void DFS(int adj[4][4], int vertex) {
+    int i;
     printf("%d ", vertex);
+    visited[vertex] = 1;
 
-    for (int i = 0; i < numVertices; i++) {
-        if (adjMatrix[vertex][i] == 1 && !visited[i]) {
-            DFS(i);
-        }
-    }
-}
-
-void initializeGraph(int vertices) {
-    numVertices = vertices;
-    for (int i = 0; i < numVertices; i++) {
-        visited[i] = 0;
-        for (int j = 0; j < numVertices; j++) {
-            adjMatrix[i][j] = 0;
+    for (i = 0; i < 4; i++) {
+        if (adj[vertex][i] == 1 && !visited[i]) {
+            DFS(adj, i);
         }
     }
 }
 
 int main() {
-    initializeGraph(5);
+    // Hardcoded adjacency matrix for 4 vertices
+    int adj[4][4] = {
+        {0, 1, 1, 0},
+        {1, 0, 1, 1},
+        {1, 1, 0, 0},
+        {0, 1, 0, 0}
+    };
 
-    addEdge(0, 1);
-    addEdge(0, 2);
-    addEdge(1, 3);
-    addEdge(1, 4);
+    int start = 0;  // Start DFS from vertex 0
 
-    printf("DFS (from vertex 0): \n");
-    DFS(0);
+    // Mark all vertices as unvisited
+    for (int i = 0; i < 4; i++)
+        visited[i] = 0;
+
+    printf("DFS traversal starting from vertex %d: ", start);
+    DFS(adj, start);
     printf("\n");
 
     return 0;
