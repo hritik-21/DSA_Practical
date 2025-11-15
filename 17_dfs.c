@@ -19,7 +19,6 @@ void DFS(int adj[4][4], int vertex) {
 }
 
 int main() {
-    // Hardcoded adjacency matrix for 4 vertices
     int adj[4][4] = {
         {0, 1, 1, 0},
         {1, 0, 1, 1},
