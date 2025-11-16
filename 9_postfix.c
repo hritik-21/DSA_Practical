@@ -13,8 +13,7 @@ void push(int n) { stack[++top] = n; }
 int pop() { return stack[top--]; }
 
 int evaluatePostfix(char exp[]) {
-    int i;
-    for (i = 0; exp[i]; i++) {
+    for (int i = 0; exp[i]; i++) {
         if (isdigit(exp[i])) {
             push(exp[i] - '0');
         } else {
