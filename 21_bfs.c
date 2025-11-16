@@ -7,7 +7,6 @@ int queue[MAX];
 int front = -1, rear = -1;
 int visited[MAX];
 
-// Enqueue function
 void enqueue(int vertex) {
     if (rear == MAX - 1)
         return;
@@ -16,14 +15,12 @@ void enqueue(int vertex) {
     queue[++rear] = vertex;
 }
 
-// Dequeue function
 int dequeue() {
     if (front == -1 || front > rear)
         return -1;
     return queue[front++];
 }
 
-// Breadth First Search function
 void BFS(int adj[4][4], int start) {
     int i, current;
 
