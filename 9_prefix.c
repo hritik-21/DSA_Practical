@@ -11,8 +11,7 @@ void push(int n) { stack[++top] = n; }
 int pop() { return stack[top--]; }
 
 int evaluatePrefix(char exp[]) {
-    int i;
-    for (i = strlen(exp) - 1; i >= 0; i--) {
+    for (int i = strlen(exp) - 1; i >= 0; i--) {
         if (isdigit(exp[i])) {
             push(exp[i] - '0');
         } else {
