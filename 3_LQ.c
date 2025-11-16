@@ -21,8 +21,8 @@ void enqueue(int data){
     }
     else{
         rear++;
-    queue[rear]=data;
-    printf("Enqueued %d\n", data);
+        queue[rear]=data;
+        printf("Enqueued %d\n", data);
     }
 }
 
