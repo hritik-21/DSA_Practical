@@ -7,11 +7,9 @@ int visited[MAX];
 
 // Depth First Search function
 void DFS(int adj[4][4], int vertex) {
-    int i;
     printf("%d ", vertex);
     visited[vertex] = 1;
-
-    for (i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
         if (adj[vertex][i] == 1 && !visited[i]) {
             DFS(adj, i);
         }
