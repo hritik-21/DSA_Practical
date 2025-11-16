@@ -5,7 +5,6 @@
 
 int visited[MAX];
 
-// Depth First Search function
 void DFS(int adj[4][4], int vertex) {
     printf("%d ", vertex);
     visited[vertex] = 1;
